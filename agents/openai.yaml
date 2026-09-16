@@ -1,0 +1,7 @@
+interface:
+  display_name: "Xuemingqi Coding Style"
+  short_description: "Apply Xuemingqi’s refined coding and directory style"
+  default_prompt: "Use $xuemingqi-coding-style when writing or modifying this code."
+
+policy:
+  allow_implicit_invocation: true
