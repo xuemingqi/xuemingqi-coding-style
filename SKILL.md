@@ -67,9 +67,3 @@ Do not restyle unrelated code. In a new project, use this skill as the starting 
 ## Avoid false imitation
 
 Do not reproduce historical artifacts such as mixed naming, duplicated defensive code, manual framework boilerplate, field injection, magic strings, vague utility buckets, excessive package depth, empty tests, local paths, hard-coded credentials, or obvious comments.
-
-## Maintaining this skill
-
-Use the installed local files directly. Do not fetch, pull, check for updates, or contact GitHub when loading or applying this skill.
-
-Only when editing this skill itself or when the user explicitly requests synchronization, read [references/github-sync.md](references/github-sync.md). Publish completed changes to this skill; download remote changes only when the user explicitly asks to pull or update it.
