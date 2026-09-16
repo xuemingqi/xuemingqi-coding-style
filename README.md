@@ -29,28 +29,3 @@
 ## 阅读方式
 
 先阅读 [SKILL.md](SKILL.md) 与 [通用编码规范](references/code-style.md)，再按任务需要阅读目录组织或对应技术栈的规范。规范正文保留原始英文内容，本 README 提供中文导航。
-
-## 多端安装与同步
-
-将仓库直接克隆到个人 Skill 目录，让安装目录同时成为 Git 工作目录：
-
-```sh
-mkdir -p ~/.agents/skills
-git clone https://github.com/xuemingqi/xuemingqi-coding-style.git ~/.agents/skills/xuemingqi-coding-style
-```
-
-已有同名目录时，先保留并比较本地修改，不要直接覆盖。个人 Skill 目录采用 [Codex 官方文档](https://learn.chatgpt.com/docs/build-skills#where-codex-loads-local-skills) 中的用户级位置。
-
-- **平时使用**：只读本地规范，不检查更新，不自动拉取。
-- **让代理修改规范**：修改完成后，同步发布到此仓库，并核对远端内容。
-- **主动要求更新**：在对应端执行拉取，更新后的文件直接作为本地 Skill 使用。
-- **自行编辑文件**：保存本身不会自动上传，需要明确要求代理同步，或自行提交并推送。
-
-主动拉取时执行：
-
-```sh
-git -C ~/.agents/skills/xuemingqi-coding-style status --short
-git -C ~/.agents/skills/xuemingqi-coding-style pull --ff-only origin main
-```
-
-若有未提交修改或分支分歧，先处理本地工作再拉取。完整流程见 [GitHub 同步规则](references/github-sync.md)。
