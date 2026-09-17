@@ -6,7 +6,15 @@
 - Keep the happy path compact and linear. Remove redundant checks, queries, conversions, assignments, fields, constants, logs, and return values.
 - Validate untrusted input at the boundary; inside the system, rely on established contracts instead of repeating defensive code.
 - Before changing a contract or deleting code, trace callers, implementations, models, persistence behavior, and tests.
-- Limit changes to the requested behavior and necessary verification. Do not copy nearby defects or restyle unrelated code.
+- Scope changes to the requested behavior, the refactoring needed for a coherent affected flow, and relevant verification. Do not copy nearby defects or restyle unrelated code.
+
+### Feature design before incremental adaptation
+
+- Before adding a feature, review how it changes existing responsibilities, data flow, state ownership, contracts, and resource lifecycle. Consider the resulting design as a whole instead of mechanically adding fields, conditionals, parameters, and adapters to existing code.
+- Prefer a clear, reasonable design over preserving the original code shape or achieving the smallest diff. Decide explicitly whether the existing flow still fits; if it does not, refactor the affected logic as part of the feature.
+- Let concrete design problems justify refactoring: repeated policy or queries, fragmented state, unclear ownership, inconsistent entry points, or obsolete branches. Consolidate these at the proper boundary and remove superseded paths instead of layering new behavior on top.
+- Keep the redesign proportional to the feature. Avoid speculative abstractions, unrelated cleanup, and broad rewrites; preserve unrelated user changes and established behavior, authorization, and lifecycle guarantees.
+- Briefly explain the selected design and its reason before substantial changes. Verify both the new behavior and the existing invariants affected by the refactor.
 
 ## 2. Reuse without over-design
 
