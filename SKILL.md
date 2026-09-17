@@ -55,6 +55,7 @@ Do not restyle unrelated code. In a new project, use this skill as the starting 
 | Boundaries | Input, output, domain, persistence, and configuration data stay distinct |
 | Web identity | Authenticate at the boundary, place trusted identity in context, and let Service read it without controller plumbing |
 | HTTP clients | Prefer declarative OpenFeign clients for stable Spring service integrations |
+| Class structure | Prefer independent top-level classes in separate files; avoid inner and nested classes, including static nested models |
 | Java models | Prefer chainable POJOs for mutable transport/state models; use records only for deliberate immutable values |
 | Dependencies | Annotation-driven, constructor-injected, and immutable where practical |
 | Persistence | Business services inject `IService` and prefer type-safe Lambda APIs; Mapper stays behind the database service implementation |
