@@ -36,7 +36,7 @@
 - Use the precise type at the boundary when the contract is known; do not receive a broad type merely to convert it immediately.
 - Avoid magic values. Use uppercase snake case constants for stable literals whose names add meaning.
 - Keep scenario-owned constants near that scenario; place genuinely shared literals in a focused common constants class.
-- Use an enum when values form a closed, meaningful set. Do not use raw strings or integers where an enum expresses the domain better.
+- Use an enum when values form a closed, meaningful set. Follow same-package enums for class and constant names, Lombok annotations, explicit code/description fields, serialization, and conversion methods. Preserve external codes; do not couple them to `Enum.name()` or replace a local `fromCode` convention with bare `valueOf`. Parse transport codes at the boundary and use the enum in internal parameters where practical.
 - Keep external input, output, domain, persistence, and configuration models distinct when their trust or lifecycle differs.
 
 ### Class structure
@@ -61,7 +61,8 @@
 
 ## 5. Control flow, errors, and logging
 
-- Give each method one observable responsibility and keep one abstraction level within it.
+- Give each method one observable responsibility and keep one abstraction level within it. Use names that state the operation and its subject, and separate meaningful phases such as validation, resource persistence, snapshot creation, and cleanup when they obscure the main flow. Do not split simple expressions into pass-through helpers merely to shorten methods.
+- Prefer lambdas, method references, Stream transformations, switch expressions, and other supported modern syntax when they make intent clearer. Favor `map`, `filter`, `collect`, and `sum` over loops that only transform or accumulate values; retain a straightforward loop when checked exceptions, resource lifetime, or control flow would otherwise become harder to read.
 - Use only necessary guard clauses, then show the happy path. Avoid deep nesting and hidden fallback behavior.
 - Extract a helper for repeated policy or a meaningful operation, not merely to shorten a method.
 - Use specific application errors for expected failures and follow the project's central response contract.
@@ -74,7 +75,8 @@
 - In Chinese-first projects, write business comments in Chinese and preserve English technical names.
 - Document every Service interface method at the contract source; do not repeat that comment on its `@Override`.
 - Add a concise comment above every private helper in a Service implementation.
-- Add a field comment above every persistent database Entity field.
+- Add a concise Javadoc comment above every new or changed model and persistent Entity field, explaining business meaning, units, ownership, null/default meaning, or lifecycle when relevant. Write access modifiers explicitly even when Lombok would infer them.
+- Write class, method, and field Javadoc as multiline blocks with `/**`, ` * ...`, and ` */` on separate lines. Do not collapse documentation into `/** ... */` on one line.
 
 ## 7. Formatting
 
@@ -83,6 +85,7 @@
 - In method declarations and calls, do not break immediately after `(` and do not put every parameter or argument on its own line.
 - Keep the declaration or call on one line when reasonable. When it is long, wrap by logical groups and keep related parameters together on the same line.
 - Keep the closing `)` with the last parameter or expression when practical. Break fluent chains by logical step.
+- Put one blank line between class field declarations, especially constructor-injected Bean dependencies, and separate constants from dependency fields. Match the target package's class and member layout.
 - Use blank lines between logical stages, not between tightly related statements.
 - Use explicit imports, remove unused imports, and follow the repository's import order.
 
