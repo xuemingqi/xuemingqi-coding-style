@@ -17,9 +17,9 @@ In Java Spring services that use MyBatis-Plus, keep persistence infrastructure u
 - Keep an interface and implementation close; use `impl` only when the interface is a meaningful boundary.
 - Separate request, response, domain, and persistence models when their fields or exposure rules differ.
 - Keep scenario policy, constants, enums, configuration, and helpers inside the owning scenario.
-- Split a package or file only when it contains responsibilities that change independently.
+- Keep named classes in separate source files, including models used by only one caller; prefer this over nesting classes in the caller. Split packages when they contain responsibilities that change independently.
 - Do not create a standalone interface, Service, or store for behavior used only by one cohesive Service unless it has an independent contract, lifecycle, or realistic reuse.
-- Avoid excessive class extraction, directory depth, repeated module names, and empty template packages.
+- Avoid unnecessary abstractions, excessive directory depth, repeated module names, and empty template packages; a standalone class does not require a new package or interface.
 
 ## 3. Promote shared code carefully
 
