@@ -33,7 +33,7 @@ Do not restyle unrelated code. In a new project, use this skill as the starting 
 
 ## Working sequence
 
-1. Inspect a small representative set of nearby files, tests, and enforced tooling.
+1. Inspect representative classes of the same kind in the target package, plus relevant tests and enforced tooling. Match their naming, annotations, enum representation, field documentation, and spacing before adding a new class.
 2. Trace callers, implementations, data models, and tests before changing a contract or deleting code.
 3. Evaluate responsibilities, data flow, state ownership, and lifecycle across the affected flow. Decide whether to extend or refactor, and briefly explain substantial design choices before editing. Apply the feature-design guidance in [references/code-style.md](references/code-style.md).
 4. Keep the happy path compact; remove repeated checks, queries, conversions, and assignments.
@@ -51,19 +51,19 @@ Do not restyle unrelated code. In a new project, use this skill as the starting 
 | Flow | Necessary guards followed by a compact, linear happy path |
 | Reuse | Shared behavior is extracted once; one-off policy stays local |
 | Utilities | Stable business-agnostic capabilities live in focused utility classes; callers retain business policy and error mapping |
-| Values | Constants for stable literals; enums for closed value sets |
+| Values | Constants for stable literals; enums follow the same-package naming, code/description fields, annotations, and parsing convention |
 | Boundaries | Input, output, domain, persistence, and configuration data stay distinct |
 | Web identity | Authenticate at the boundary, place trusted identity in context, and let Service read it without controller plumbing |
 | HTTP clients | Prefer declarative OpenFeign clients for stable Spring service integrations |
 | Class structure | Prefer independent top-level classes in separate files; avoid inner and nested classes, including static nested models |
 | Java models | Prefer chainable POJOs for mutable transport/state models; use records only for deliberate immutable values |
-| Dependencies | Annotation-driven, constructor-injected, and immutable where practical |
+| Dependencies | Annotation-driven, constructor-injected, and immutable where practical; separate injected fields with blank lines |
 | Persistence | Business services inject `IService` and prefer type-safe Lambda APIs; Mapper stays behind the database service implementation |
 | Java services | Contracts live in `service`; implementations live in `service/impl` and contain the orchestration |
 | Comments | Explain business intent, constraints, or reasons |
 | Service docs | Document service contracts and private helpers; do not repeat interface docs on overrides |
-| Entity docs | Add a field comment above every database Entity field |
-| Formatting | Do not break immediately after `(` or put every argument on its own line |
+| Fields | Document every new or changed model and Entity field; declare entity column mappings explicitly |
+| Formatting | Use multiline Javadoc and blank lines between fields; do not break immediately after `(` or put every argument on its own line |
 | Directories | Follow the repository's organization axis and place every file under its actual responsibility; never use a feature catch-all |
 | Tests | Describe observable behavior and remain environment-independent |
 
