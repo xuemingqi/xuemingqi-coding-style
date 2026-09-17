@@ -10,7 +10,7 @@ Use these rules for Java Spring modules backed by MyBatis or MyBatis-Plus. Treat
 - Put database CRUD implementations in `db/service/impl`; name them `<Entity>IServiceImpl`, annotate them with `@Service`, extend `ServiceImpl<EntityMapper, Entity>`, and implement `<Entity>IService`.
 - Keep orchestration, validation, authorization, transactions, conversions, and calls to other systems in the business Service implementation. Keep the database Service thin and persistence-focused.
 - Do not omit a business Service interface merely because there is currently one implementation. The interface is the module contract and the implementation belongs under `impl`.
-- Inject dependencies through `private final` fields and constructor injection, normally with `@RequiredArgsConstructor`. Do not add new `@Resource` or mutable field injection.
+- Inject dependencies through `private final` fields and constructor injection, normally with `@RequiredArgsConstructor`. Put one blank line between dependency fields and use the same naming style as neighboring services. Do not add new `@Resource` or mutable field injection.
 
 Typical layout:
 
@@ -41,9 +41,9 @@ Create only the packages the module actually needs.
 ### `db/entity/<Entity>.java`
 
 - Use a singular domain noun without an `Entity` suffix when that is the module convention.
-- Map the table explicitly with `@TableName`, the primary key with `@TableId`, and persistent columns with `@TableField` when explicit mapping improves safety and schema visibility.
+- Map the table explicitly with `@TableName`, the primary key and its column name with `@TableId`, and every remaining persistent field with `@TableField` and an explicit column name. Do not omit mappings because camel-case conversion can infer them. Preserve required type handlers and audit-field strategies on the same annotation.
 - Keep field types aligned with the schema. Use a persistence enum instead of a raw integer or string for a closed coded column.
-- Add a concise Chinese Javadoc comment above every persistent field. State units, null meaning, ownership, or coded values when they matter.
+- Add a concise multiline Chinese Javadoc comment above every persistent field. State units, null meaning, ownership, or coded values when they matter; keep documentation above the field mapping annotation.
 - Mark database-managed audit fields such as `create_time` and `update_time` so inserts and updates never overwrite them, for example with `FieldStrategy.NEVER`. Do not apply that rule to business-managed timestamps.
 - Keep entities persistence-only: no controller response shape, remote API contract, repository query, or business orchestration.
 - Use Lombok consistently with neighboring entities. `@Data` and chain accessors are acceptable; add builders and constructors only when construction patterns require them.
