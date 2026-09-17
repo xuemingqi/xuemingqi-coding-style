@@ -11,7 +11,7 @@ Load this skill when the task requires writing, modifying, or refactoring source
 
 ## Core principle
 
-Write minimal, clear, and extensible code. Remove duplication, extract genuinely reusable behavior, and let names, control flow, and package placement reveal intent without over-abstraction.
+Prioritize a coherent design and clear logic when adding a feature. Assess whether the new behavior calls for refactoring the affected flow before extending the existing code; preserving its current shape or minimizing changed lines is not the goal. Keep the resulting code minimal, explicit, and extensible without over-abstraction.
 
 ## Resolve precedence first
 
@@ -35,16 +35,18 @@ Do not restyle unrelated code. In a new project, use this skill as the starting 
 
 1. Inspect a small representative set of nearby files, tests, and enforced tooling.
 2. Trace callers, implementations, data models, and tests before changing a contract or deleting code.
-3. Keep the happy path compact; remove repeated checks, queries, conversions, and assignments.
-4. Extract stable, stateless, business-agnostic capabilities into focused utility classes in the appropriate common or
+3. Evaluate responsibilities, data flow, state ownership, and lifecycle across the affected flow. Decide whether to extend or refactor, and briefly explain substantial design choices before editing. Apply the feature-design guidance in [references/code-style.md](references/code-style.md).
+4. Keep the happy path compact; remove repeated checks, queries, conversions, and assignments.
+5. Extract stable, stateless, business-agnostic capabilities into focused utility classes in the appropriate common or
    shared module; keep scenario policy and orchestration inside the owning module.
-5. Add or update focused tests and run the narrowest relevant verification.
-6. Review the diff for broken references, magic values, excessive splitting, misplaced files, and unrelated changes.
+6. Add or update focused tests and run the narrowest relevant verification.
+7. Review the diff for broken references, magic values, excessive splitting, misplaced files, and unrelated changes.
 
 ## Quick check
 
 | Concern | Expected shape |
 |---|---|
+| Design | Evaluate the affected flow before extending it; refactor when it makes the resulting responsibilities and logic clearer |
 | Names | Full, stable, role-revealing words |
 | Flow | Necessary guards followed by a compact, linear happy path |
 | Reuse | Shared behavior is extracted once; one-off policy stays local |
