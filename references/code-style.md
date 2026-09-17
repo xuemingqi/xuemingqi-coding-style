@@ -39,6 +39,11 @@
 - Use an enum when values form a closed, meaningful set. Do not use raw strings or integers where an enum expresses the domain better.
 - Keep external input, output, domain, persistence, and configuration models distinct when their trust or lifecycle differs.
 
+### Class structure
+
+- Prefer independent, named top-level classes in separate source files. Avoid inner or nested classes, including static nested configuration, model, and helper classes; having only one caller is not by itself a reason to nest a class.
+- Place each class in the package that owns its responsibility and keep dependencies explicit instead of relying on an enclosing instance. Keep a nested class only when a concrete language or framework constraint makes it necessary.
+
 ## 4. Framework and dependencies
 
 - Prefer framework annotations for component registration, dependency injection, validation, transactions, mapping, and other standard lifecycle behavior.
