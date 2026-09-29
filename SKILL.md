@@ -13,6 +13,18 @@ Load this skill when the task requires writing, modifying, or refactoring source
 
 Prioritize a coherent design and clear logic when adding a feature. Assess whether the new behavior calls for refactoring the affected flow before extending the existing code; preserving its current shape or minimizing changed lines is not the goal. Keep the resulting code minimal, explicit, and extensible without over-abstraction.
 
+## Minimal implementation ladder
+
+Before writing new code, evaluate these options in order and stop at the first one that fully satisfies the user's current request and the repository's constraints:
+
+1. Does this functionality need to be built at all? If it is not required, do not add it; follow YAGNI.
+2. Does the project already contain a suitable utility, type, component, or implementation pattern? Reuse it.
+3. Does the standard library already support it? Prefer the standard library.
+4. Does a native browser, database, operating-system, or framework capability support it? Prefer the native capability.
+5. Does an already-installed dependency solve it? Reuse that dependency.
+6. Can a small, direct implementation satisfy the requirement? Prefer it.
+7. Only when none of the earlier options applies, write the minimum new implementation that fully satisfies the current requirement.
+
 ## Resolve precedence first
 
 Apply guidance in this order:
